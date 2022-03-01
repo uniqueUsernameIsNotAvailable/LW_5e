@@ -213,15 +213,6 @@ LW_5e_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 LW_5e_SOURCE_DIR:STATIC=C:/Users/PeePeePooPoo/CLionProjects/LW_5e
 
-//Value Computed by CMake
-project_BINARY_DIR:STATIC=C:/Users/PeePeePooPoo/CLionProjects/LW_5e/cmake-build-debug
-
-//Value Computed by CMake
-project_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-project_SOURCE_DIR:STATIC=C:/Users/PeePeePooPoo/CLionProjects/LW_5e
-
 
 ########################
 # INTERNAL cache entries

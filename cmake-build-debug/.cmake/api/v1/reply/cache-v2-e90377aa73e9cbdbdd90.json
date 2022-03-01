@@ -1120,42 +1120,6 @@
 			],
 			"type" : "STATIC",
 			"value" : "C:/Users/PeePeePooPoo/CLionProjects/LW_5e"
-		},
-		{
-			"name" : "project_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/PeePeePooPoo/CLionProjects/LW_5e/cmake-build-debug"
-		},
-		{
-			"name" : "project_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "project_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/PeePeePooPoo/CLionProjects/LW_5e"
 		}
 	],
 	"kind" : "cache",
