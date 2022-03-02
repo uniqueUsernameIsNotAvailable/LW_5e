@@ -3,10 +3,11 @@ project(LW_5e C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(LW_5e main.c string/string_.c string/string_.h)
+add_executable(LW_5e main.c string/string_.c string/string_.h string/tasks/task1.h string/tasks/task2.h)
 
-add_library (str string/string_.h string/string_.c
-        # string / tasks / digitToStartTransform .h
+add_library(str string/string_.h string/string_.c
+        string/tasks/task1.h
+        string/tasks/task2.h
         # string / tasks / reverseWords .h
         # string / tasks / replaceDigitsBySpaces .h
         # ...
@@ -16,4 +17,4 @@ add_library (str string/string_.h string/string_.c
         # string / tasks / printWordsNonEqualLastWord .h
         )
 
-target_link_libraries (LW_5e str)
+target_link_libraries(LW_5e str)

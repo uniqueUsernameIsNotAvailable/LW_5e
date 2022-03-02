@@ -91,13 +91,49 @@ void test_findSpaceReverse() {
     test_findSpaceReverse_spacesString();
 }
 
+
+void test_strcmp_equalStrings(){
+    char s[] = " \t ";
+    char s1[] = " \t ";
+
+    assert(strcmp(s,s1) == 0);
+}
+
+void test_strcmp_firstStringLower(){
+    char s[] = "IMLOWER";
+    char s1[] = "imhigher";
+
+    assert(strcmp(s,s1) == -1);
+}
+
+void test_strcmp_secondStringLower() {
+    char s[] = "imhigher";
+    char s1[] = "IMLOWER";
+
+    assert(strcmp(s, s1) == 1);
+}
+
+void test_strcmp_stringContainsStringLower() {
+    char s[] = "imhigher";
+    char s1[] = "IMLOWER";
+
+    assert(strcmp(s, s1) == 1);
+}
+
+void test_strcmp(){
+    test_strcmp_equalStrings();
+    test_strcmp_firstStringLower();
+    test_strcmp_secondStringLower();
+}
+
 int main() {
     test_findNonSpace();
     test_findSpace();
     test_findNonSpaceReverse();
     test_findSpaceReverse();
-
+    test_strcmp();
     /*
      */
     return 0;
 }
+

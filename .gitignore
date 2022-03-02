@@ -65,4 +65,7 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+.idea
+cmake-build-debug
 !/CMakeLists.txt
+.gitignore

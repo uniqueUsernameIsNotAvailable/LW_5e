@@ -46,3 +46,41 @@ char *findSpaceReverse(char *rstart, const char *rend) {
 
     return rstart;
 }
+
+//seems working pretty well
+int strcmp(const char *lhs, const char *rhs) {
+    while (*lhs && *rhs == *lhs)
+        lhs++, rhs++;
+
+    return (*lhs > *rhs) - (*rhs > *lhs);
+}
+
+char *copy(const char *startSource, const char *endSource, char *startDestination) {
+    memcpy(startDestination, startSource, endSource - startSource);
+
+    return startDestination + (endSource - startSource);
+}
+
+char *copyIf(char *startSource, const char *endSource, char *startDestination, int (*f)(int)) {
+    while (startSource != endSource) {
+        if (f(*startSource)) {
+            *startDestination = *startSource;
+            startDestination++;
+        }
+        startSource++;
+    }
+
+    return startDestination;
+}
+
+char *copyIfReverse(char *rstartSource, const char *rendSource, char *startDestination, int (*f)(int)) {
+    while (rstartSource != rendSource) {
+        if (f(*rstartSource)) {
+            *startDestination = *rstartSource;
+            startDestination++;
+        }
+        rstartSource--;
+    }
+
+    return startDestination;
+}
