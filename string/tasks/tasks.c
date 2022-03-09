@@ -62,9 +62,15 @@ void test_removeExtraSpaces_emptyStringCase() {
 void test_removeExtraSpaces_lastSpaceStringCase() {
     char s[] = "The quick brown fox jumps over the lazy dog  ";
     removeExtraSpaces(s);
+
     ASSERT_STRING("The quick brown fox jumps over the lazy dog ", s);
 }
 
+void test_removeExtraSpaces() {
+    test_removeExtraSpaces_simpleCase();
+    test_removeExtraSpaces_emptyStringCase();
+    test_removeExtraSpaces_lastSpaceStringCase();
+}
 
 //---------------------------------------- TASK 3.3
 void digitToStart_(WordDescriptor word) {
@@ -105,6 +111,11 @@ void test_digitToStart_difficultCase() {
     ASSERT_STRING("123Simple 23Text", s);
 }
 
+void test_digitToStart(){
+    test_digitToStart_simpleCase();
+    test_digitToStart_emptyStringCase();
+    test_digitToStart_difficultCase();
+}
 //---------------------------------------- TASK 4
 void replaceNumsWithSpaces(char *s) {
     char *endBuffer = copy(s, s + strLen(s), _stringBuffer);
@@ -141,14 +152,14 @@ void test_replaceNumsWithSpaces_noNums() {
 }
 
 void test_replaceNumsWithSpaces_numsOnly() {
-    char s[MAX_STRING_SIZE] = "012";
+    char s[] = "012";
     replaceNumsWithSpaces(s);
 
     ASSERT_STRING("   ", s);
 }
 
 void test_replaceNumsWithSpaces_simpleCase() {
-    char s[MAX_STRING_SIZE] = "oneSpace1twoSpaces2";
+    char s[] = "oneSpace1twoSpaces2";
     replaceNumsWithSpaces(s);
 
     ASSERT_STRING("oneSpace twoSpaces  ", s);
@@ -444,15 +455,56 @@ void test_getStringDiffFromLastWord() {
 //---------------------------------------- TASK 18
 
 //---------------------------------------- TASK 19
+_Bool areAllLettersInString(char *string, char *word) {
+    static char stringArray[255];
+
+    if (*word == '\0' || *string == '\0')
+        return 0;
+    while (*string != '\0') {
+        stringArray[*string]++;
+        string++;
+    }
+    while (*word != '\0') {
+        if (!stringArray[*word])
+            return 0;
+        word++;
+    }
+    return 1;
+}
+
+void test_areAllLettersInString_simpleCase() {
+    char s[] = "QWERTY";
+    char letterSet[] = "TY";
+
+    assert(areAllLettersInString(s, letterSet) == 1);
+}
+
+
+void test_areAllLettersInString_spacesString() {
+    char s[] = "   QWE";
+    char letterSet[] = "Q";
+
+    assert(areAllLettersInString(s, letterSet) == 1);
+}
+
+void test_areAllLettersInString_noWord() {
+    char s[] = "QWE";
+    char letterSet[] = "";
+
+    assert(areAllLettersInString(s, letterSet) == 0);
+}
+
+void test_allLettersOfWordAreIncludedInString() {
+    test_areAllLettersInString_simpleCase();
+    test_areAllLettersInString_noWord();
+    test_areAllLettersInString_spacesString();
+}
+
 
 int main() {
     test_removeNonLetters_simpleCase();
-    test_removeExtraSpaces_simpleCase();
-    test_removeExtraSpaces_emptyStringCase();
-    test_removeExtraSpaces_lastSpaceStringCase();
-    test_digitToStart_simpleCase();
-    test_digitToStart_emptyStringCase();
-    test_digitToStart_difficultCase();
+    test_removeExtraSpaces();
+    test_digitToStart();
     test_replaceNumsWithSpaces();
     test_areWordsOrdered();
     //char s7[] = "ABCCCB";
@@ -461,6 +513,8 @@ int main() {
     test_reverseStringOfWords();
     test_hasEqualWords();
     test_getStringDiffFromLastWord();
+    //test_removePaliWords();
+    test_allLettersOfWordAreIncludedInString();
 }
 
 
