@@ -2,12 +2,13 @@
 #include "../string_.h"
 
 char _stringBuffer[MAX_STRING_SIZE + 1];
-BagOfWords _bag ;
-BagOfWords _bag2 ;
+BagOfWords _bag;
+BagOfWords _bag2;
 
-int true(){
+int true() {
     return 1;
 }
+
 //---------------------------------------- TASK 1
 char *getEndOfString(char *s) {
     while (*s != '\0')
@@ -210,6 +211,7 @@ void test_areWordsOrdered() {
     test_areWordsOrdered_noOrderString();
     test_areWordsOrdered_orderedString();
 }
+
 //---------------------------------------- TASK 7
 void reverseOutputWordsFromBag(char *s) {
     *copy(s, getEndOfString(s), _stringBuffer) = '\0';
@@ -221,7 +223,68 @@ void reverseOutputWordsFromBag(char *s) {
         printf("%s \n", start);
     }
 }
+
 //---------------------------------------- TASK 8
+_Bool isPaliWord(char *begin, char *end) {
+    end--;
+
+    while (end - begin > 0) {
+        if (*begin != *end)
+            return 0;
+
+        begin++;
+        end--;
+    }
+
+    return 1;
+}
+
+
+int countPaliWords(char *s) {
+    char *end = getEndOfString(s);
+    char *beginSearch = findNonSpace(s);
+
+    int amountOfPaliWords = 0;
+
+    char *separatorPlace = find(beginSearch, end, ',');
+    _Bool separatorNotFound = *separatorPlace == '\0' && end - beginSearch != 0;
+
+    while (*separatorPlace != '\0' || separatorNotFound) {
+        amountOfPaliWords += isPaliWord(beginSearch, separatorPlace);
+
+        beginSearch = separatorPlace + 1;
+
+        if (*separatorPlace == '\0')
+            return amountOfPaliWords;
+
+        separatorPlace = find(beginSearch, end, ',');
+        separatorNotFound = *separatorPlace == '\0';
+    }
+
+    return amountOfPaliWords;
+}
+
+void test_countPaliWords_emptyString() {
+    char s[] = "";
+
+    assert(countPaliWords(s) == 0);
+}
+
+void test_countPaliWords_multiplePalindromeString() {
+    char s[] = "AABAA,BBABB";
+    assert(countPaliWords(s) == 2);
+}
+
+void test_countPaliWords_notEveryIsPalindromeString() {
+    char s[] = "AABAA, BBAAB";
+    assert(countPaliWords(s) == 1);
+}
+
+void test_getCountPoly() {
+    test_countPaliWords_emptyString();
+    test_countPaliWords_multiplePalindromeString();
+    test_countPaliWords_notEveryIsPalindromeString();
+}
 //---------------------------------------- TASK 9
 
 //---------------------------------------- TASK 10
@@ -254,8 +317,9 @@ int main() {
     test_digitToStart_difficultCase();
     test_replaceNumsWithSpaces();
     test_areWordsOrdered();
-    char s7[] = "ABCCCB" ;
+    char s7[] = "ABCCCB";
     reverseOutputWordsFromBag(s7);
+    test_getCountPoly();
 }
 
 

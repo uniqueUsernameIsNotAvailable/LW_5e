@@ -25,6 +25,9 @@ typedef struct BagOfWords {
 //Returning the length of the string.
 size_t strLen(char *start);
 
+//It finds the first occurrence of the character `target` in the string.
+char *find(char *start, const char *end, int target);
+
 //Finding the first non-space character in the string.
 char *findNonSpace(char *start);
 
