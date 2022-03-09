@@ -272,11 +272,13 @@ void test_countPaliWords_emptyString() {
 
 void test_countPaliWords_multiplePalindromeString() {
     char s[] = "AABAA,BBABB";
+
     assert(countPaliWords(s) == 2);
 }
 
 void test_countPaliWords_notEveryIsPalindromeString() {
     char s[] = "AABAA, BBAAB";
+
     assert(countPaliWords(s) == 1);
 }
 
@@ -288,7 +290,58 @@ void test_getCountPoly() {
 //---------------------------------------- TASK 9
 
 //---------------------------------------- TASK 10
+int reverseWord(char *rstart, char *rend, WordDescriptor *word) {
+    char *wordEnd = findNonSpaceReverse(rstart, rend);
 
+    if (wordEnd == rend)
+        return 0;
+
+    char *wordStart = findSpaceReverse(wordEnd, rend);
+
+    word->begin = wordStart + 1;
+    word->end = wordEnd + 1;
+
+    return 1;
+}
+
+void reverseStringOfWords(char *s) {
+    if (*s == '\0')
+        return;
+
+    char *endBuffer = copy(s, getEndOfString(s), _stringBuffer);
+
+    WordDescriptor word;
+
+    while (reverseWord(endBuffer - 1, _stringBuffer - 1, &word)) {
+        s = copy(word.begin, word.end, s);
+
+        *s++ = ' ';
+
+        endBuffer = word.begin;
+    }
+
+    s--;
+    *s = '\0';
+}
+
+void test_reverseStringOfWords_emptyString() {
+    char s[] = "";
+    reverseStringOfWords(s);
+
+    ASSERT_STRING("", s);
+}
+
+void test_reverseStringOfWords_simpleCase() {
+    char s[MAX_STRING_SIZE] = "simple text ";
+    reverseStringOfWords(s);
+
+    ASSERT_STRING("text simple", s);
+}
+
+void test_task10() {
+    test_reverseStringOfWords_emptyString();
+    test_reverseStringOfWords_simpleCase();
+}
 //---------------------------------------- TASK 11
 
 //---------------------------------------- TASK 12
@@ -320,6 +373,7 @@ int main() {
     char s7[] = "ABCCCB";
     reverseOutputWordsFromBag(s7);
     test_getCountPoly();
+    test_task10();
 }
 
 
