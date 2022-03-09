@@ -2,7 +2,12 @@
 #include "../string_.h"
 
 char _stringBuffer[MAX_STRING_SIZE + 1];
+BagOfWords _bag ;
+BagOfWords _bag2 ;
 
+int true(){
+    return 1;
+}
 //---------------------------------------- TASK 1
 char *getEndOfString(char *s) {
     while (*s != '\0')
@@ -61,14 +66,6 @@ void test_removeExtraSpaces_lastSpaceStringCase() {
 
 
 //---------------------------------------- TASK 3.3
-int getWord(char *beginSearch, WordDescriptor *word) {
-    word->begin = findNonSpace(beginSearch);
-    if (*word->begin == '\0')
-        return 0;
-    word->end = findSpace(word->begin);
-    return 1;
-}
-
 void digitToStart_(WordDescriptor word) {
     char *endStringBuffer = copy(word.begin, word.end, _stringBuffer);
     char *recPosition = copyIf(_stringBuffer, endStringBuffer, word.begin, isdigit);
@@ -214,6 +211,16 @@ void test_areWordsOrdered() {
     test_areWordsOrdered_orderedString();
 }
 //---------------------------------------- TASK 7
+void reverseOutputWordsFromBag(char *s) {
+    *copy(s, getEndOfString(s), _stringBuffer) = '\0';
+    getBagOfWords(&_bag, _stringBuffer);
+
+    char *start = s;
+    for (int i = 0; i < _bag.size; i++) {
+        *copyIfReverse(_bag.words[i].end - 1, _bag.words[i].begin - 1, start, true) = '\0';
+        printf("%s \n", start);
+    }
+}
 //---------------------------------------- TASK 8
 //---------------------------------------- TASK 9
 
@@ -247,6 +254,8 @@ int main() {
     test_digitToStart_difficultCase();
     test_replaceNumsWithSpaces();
     test_areWordsOrdered();
+    char s7[] = "ABCCCB" ;
+    reverseOutputWordsFromBag(s7);
 }
 
 

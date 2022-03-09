@@ -84,11 +84,30 @@ char *copyIfReverse(char *rstartSource, const char *rendSource, char *startDesti
     return startDestination;
 }
 
-int areWordsEqual(WordDescriptor w1, WordDescriptor w2) {
-    if (w1.end - w1.begin != w2.end - w2.begin)
+int getWord(char *beginSearch, WordDescriptor *word) {
+    word->begin = findNonSpace(beginSearch);
+    if (*word->begin == '\0')
         return 0;
 
-    return !memcmp(w1.begin, w2.begin, w1.end - w1.begin);
+    word->end = findSpace(word->begin);
+    return 1;
+}
+
+int areWordsEqual(WordDescriptor word1, WordDescriptor word2) {
+    if (word1.end - word1.begin != word2.end - word2.begin)
+        return 0;
+
+    return !memcmp(word1.begin, word2.begin, word1.end - word1.begin);
+}
+
+void getBagOfWords(BagOfWords *bag, char *s) {
+    bag->size = 0;
+    WordDescriptor word;
+
+    while (getWord(s, &word)) {
+        bag->words[bag->size++] = word;
+        s = word.end;
+    }
 }
 
 void assertString(const char *expected, char *got, char const *fileName, char const *funcName, int line) {

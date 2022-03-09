@@ -17,6 +17,10 @@ typedef struct WordDescriptor {
     char *end; // позиция первого символа, после последнего символа слова
 } WordDescriptor;
 
+typedef struct BagOfWords {
+    WordDescriptor words[MAX_N_WORDS_IN_STRING];
+    size_t size;
+} BagOfWords;
 
 //Returning the length of the string.
 size_t strLen(char *start);
@@ -45,8 +49,14 @@ char *copyIf(char *startSource, const char *endSource, char *startDestination, i
 //Copying the string from the source to the destination by predicate by reversed order.
 char *copyIfReverse(char *rstartSource, const char *rendSource, char *startDestination, int (*f)(int));
 
+//Returning the length of the word.
+int getWord(char *beginSearch, WordDescriptor *word);
+
 //Comparing two words.
-int areWordsEqual(WordDescriptor w1, WordDescriptor w2);
+int areWordsEqual(WordDescriptor word1, WordDescriptor word2);
+
+//Filling the `bag` with the words from the `s`.
+void getBagOfWords(BagOfWords *bag, char *s);
 
 //Assert function that checks if the string `got` is equal to the string `expected`.
 void assertString(const char *expected, char *got, char const *fileName, char const *funcName, int line);

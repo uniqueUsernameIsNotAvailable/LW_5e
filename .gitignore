@@ -1,5 +1,4 @@
-### C template
-# Prerequisites
+
 *.d
 
 # Object files
@@ -68,4 +67,3 @@ _deps
 .idea
 cmake-build-debug
 !/CMakeLists.txt
-.gitignore
