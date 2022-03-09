@@ -51,7 +51,7 @@ int strcmp(const char *lhs, const char *rhs) {
     while (*lhs && *rhs == *lhs)
         lhs++, rhs++;
 
-    return (*lhs > *rhs) - (*rhs > *lhs);
+    return *lhs - *rhs;
 }
 
 char *copy(const char *startSource, const char *endSource, char *startDestination) {
@@ -82,6 +82,13 @@ char *copyIfReverse(char *rstartSource, const char *rendSource, char *startDesti
     }
 
     return startDestination;
+}
+
+int areWordsEqual(WordDescriptor w1, WordDescriptor w2) {
+    if (w1.end - w1.begin != w2.end - w2.begin)
+        return 0;
+
+    return !memcmp(w1.begin, w2.begin, w1.end - w1.begin);
 }
 
 void assertString(const char *expected, char *got, char const *fileName, char const *funcName, int line) {

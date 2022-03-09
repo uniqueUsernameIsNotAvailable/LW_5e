@@ -45,6 +45,10 @@ char *copyIf(char *startSource, const char *endSource, char *startDestination, i
 //Copying the string from the source to the destination by predicate by reversed order.
 char *copyIfReverse(char *rstartSource, const char *rendSource, char *startDestination, int (*f)(int));
 
+//Comparing two words.
+int areWordsEqual(WordDescriptor w1, WordDescriptor w2);
+
+//Assert function that checks if the string `got` is equal to the string `expected`.
 void assertString(const char *expected, char *got, char const *fileName, char const *funcName, int line);
 
 #endif //LW_5E_STRING__H

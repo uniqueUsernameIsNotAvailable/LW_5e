@@ -1,3 +1,4 @@
+#include <assert.h>
 #include "../string_.h"
 
 char _stringBuffer[MAX_STRING_SIZE + 1];
@@ -76,12 +77,12 @@ void digitToStart_(WordDescriptor word) {
 }
 
 void digitToStart(char *s) {
-    char *beginSearch = s;
+    char *startSearch = s;
     WordDescriptor word;
 
-    while (getWord(beginSearch, &word)) {
+    while (getWord(startSearch, &word)) {
         digitToStart_(word);
-        beginSearch = word.end;
+        startSearch = word.end;
     }
 }
 
@@ -109,19 +110,19 @@ void test_digitToStart_difficultCase() {
 //---------------------------------------- TASK 4
 void replaceNumsWithSpaces(char *s) {
     char *endBuffer = copy(s, s + strLen(s), _stringBuffer);
-    char *beginBuffer = _stringBuffer;
+    char *startBuffer = _stringBuffer;
 
-    while (beginBuffer < endBuffer) {
-        if (isdigit(*beginBuffer)) {
-            long long spacesAmount = *beginBuffer - '0';
+    while (startBuffer < endBuffer) {
+        if (isdigit(*startBuffer)) {
+            long long spacesAmount = *startBuffer - '0';
 
             for (int i = 0; i < spacesAmount; ++i)
                 *s++ = ' ';
 
         } else
-            *s++ = *beginBuffer;
+            *s++ = *startBuffer;
 
-        beginBuffer++;
+        startBuffer++;
     }
 
     *s = '\0';
@@ -161,8 +162,57 @@ void test_replaceNumsWithSpaces() {
     test_replaceNumsWithSpaces_numsOnly();
     test_replaceNumsWithSpaces_simpleCase();
 }
+
 //---------------------------------------- TASK 5
 //---------------------------------------- TASK 6
+_Bool areWordsOrdered(char *s) {
+    WordDescriptor w1;
+    WordDescriptor w2;
+//check
+    if (!getWord(s, &w1))
+        return 1;
+
+    while (getWord(s, &w2)) {
+        if (!areWordsEqual(w1, w2) && strcmp(w1.begin, w2.begin) > 0)
+            return 0;
+
+        w1 = w2;
+        s = w2.end;
+    }
+
+    return 1;
+}
+
+void test_areWordsOrdered_emptyString() {
+    char s[] = "";
+
+    assert(areWordsOrdered(s) == 1);
+}
+
+void test_areWordsOrdered_noOrderString() {
+    char s[] = "hello World";
+
+    assert(areWordsOrdered(s) == 0);
+}
+
+void test_areWordsOrdered_oneWordString() {
+    char s[] = "Hello";
+
+    assert(areWordsOrdered(s) == 1);
+}
+
+void test_areWordsOrdered_orderedString() {
+    char s[] = "Hello world";
+
+    assert(areWordsOrdered(s) == 1);
+}
+
+void test_areWordsOrdered() {
+    test_areWordsOrdered_emptyString();
+    test_areWordsOrdered_oneWordString();
+    test_areWordsOrdered_noOrderString();
+    test_areWordsOrdered_orderedString();
+}
 //---------------------------------------- TASK 7
 //---------------------------------------- TASK 8
 //---------------------------------------- TASK 9
@@ -196,6 +246,7 @@ int main() {
     test_digitToStart_emptyStringCase();
     test_digitToStart_difficultCase();
     test_replaceNumsWithSpaces();
+    test_areWordsOrdered();
 }
 
 
