@@ -91,5 +91,5 @@ void assertString(const char *expected, char *got, char const *fileName, char co
         fprintf(stderr, " Expected : \"%s \"\n", expected);
         fprintf(stderr, " Got : \"%s \"\n\n", got);
     } else
-        fprintf(stderr, "%s - OK\n", funcName);
+        fprintf(stderr, "%s - :) \n", funcName);
 }

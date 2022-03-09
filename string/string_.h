@@ -5,8 +5,18 @@
 #define ASSERT_STRING(expected, got) assertString(expected, got, \
 __FILE__ , __FUNCTION__ , __LINE__ )
 
+#define MAX_STRING_SIZE 1000
+
+
 #ifndef LW_5E_STRING__H
 #define LW_5E_STRING__H
+
+typedef struct WordDescriptor {
+    char *begin; // позиция начала слова
+    char *end; // позиция первого символа, после последнего символа слова
+} WordDescriptor;
+
+
 
 //Returning the length of the string.
 size_t strLen(char *start);
@@ -27,13 +37,14 @@ char *findSpaceReverse(char *rstart, const char *rend);
 int strcmp(const char *lhs, const char *rhs);
 
 //Copying the string from the source to the destination.
-char* copy(const char *startSource, const char *endSource, char *startDestination);
+char *copy(const char *startSource, const char *endSource, char *startDestination);
 
 //Copying the string from the source to the destination by predicate.
-char* copyIf(char *startSource, const char *endSource, char *startDestination, int (*f)(int));
+char *copyIf(char *startSource, const char *endSource, char *startDestination, int (*f)(int));
 
 //Copying the string from the source to the destination by predicate by reversed order.
-char* copyIfReverse(char *rstartSource, const char *rendSource, char *startDestination, int (*f)(int));
+char *copyIfReverse(char *rstartSource, const char *rendSource, char *startDestination, int (*f)(int));
 
 void assertString(const char *expected, char *got, char const *fileName, char const *funcName, int line);
+
 #endif //LW_5E_STRING__H

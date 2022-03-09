@@ -141,6 +141,7 @@ void test_copy_defaultString(){
     ASSERT_STRING("abcdefg", s2);
     assert(&s2[7] == newPointer);
 }
+
 void test_copyIf_defaultString(){
     char s1[8] = "abcdefg";
     char s2[10];
