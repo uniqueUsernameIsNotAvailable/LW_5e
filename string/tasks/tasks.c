@@ -332,13 +332,13 @@ void test_reverseStringOfWords_emptyString() {
 }
 
 void test_reverseStringOfWords_simpleCase() {
-    char s[MAX_STRING_SIZE] = "simple text ";
+    char s[] = "simple text ";
     reverseStringOfWords(s);
 
     ASSERT_STRING("text simple", s);
 }
 
-void test_task10() {
+void test_reverseStringOfWords() {
     test_reverseStringOfWords_emptyString();
     test_reverseStringOfWords_simpleCase();
 }
@@ -347,11 +347,96 @@ void test_task10() {
 //---------------------------------------- TASK 12
 
 //---------------------------------------- TASK 13
+_Bool hasEqualWords(char *s) {
+    getBagOfWords(&_bag, s);
 
+    for (int i = 0; i < _bag.size; ++i)
+        for (int j = i + 1; j < _bag.size; ++j)
+            if (areWordsEqual(_bag.words[i], _bag.words[j]) == 1)
+                return 1;
+
+    return 0;
+}
+
+void test_hasEqualWords_emptyString() {
+    char s[] = "";
+
+    assert(hasEqualWords(s) == 0);
+}
+
+void test_hasEqualWords_simpleCase() {
+    char s[] = "simple text text";
+
+    assert(hasEqualWords(s) == 1);
+}
+
+void test_hasEqualWords_noEqualWordsString() {
+    char s[] = "not a simple text";
+
+    assert(hasEqualWords(s) == 0);
+}
+
+void test_hasEqualWords() {
+    test_hasEqualWords_emptyString();
+    test_hasEqualWords_simpleCase();
+    test_hasEqualWords_noEqualWordsString();
+}
 //---------------------------------------- TASK 14
 
 //---------------------------------------- TASK 15
+void getStringDiffFromLastWord(char *s) {
+    WordDescriptor word, lastWord;
 
+    char *endBuffer = copy(s, getEndOfString(s), _stringBuffer);
+    *endBuffer = '\0';
+
+    if (!reverseWord(endBuffer - 1, _stringBuffer - 1, &lastWord))
+        return;
+
+    char *beginBuffer = _stringBuffer;
+    char *endString = s;
+
+    while (getWord(beginBuffer, &word)) {
+        if (!areWordsEqual(lastWord, word)) {
+            endString = copy(word.begin, word.end, endString);
+
+            *endString = ' ';
+            endString++;
+        }
+
+        beginBuffer = word.end;
+    }
+    endString -= s != endString;
+    *endString = '\0';
+}
+
+void test_getStringDiffFromLastWord_emptyString() {
+    char s[] = "";
+    getStringDiffFromLastWord(s);
+
+    ASSERT_STRING("", s);
+}
+
+void test_getStringDiffFromLastWord_oneWordString() {
+    char s[] = "text";
+    getStringDiffFromLastWord(s);
+
+    ASSERT_STRING("", s);
+}
+
+
+void test_getStringDiffFromLastWord_simpleCase() {
+    char s[] = "simple text";
+    getStringDiffFromLastWord(s);
+
+    ASSERT_STRING("simple", s);
+}
+
+void test_getStringDiffFromLastWord() {
+    test_getStringDiffFromLastWord_emptyString();
+    test_getStringDiffFromLastWord_oneWordString();
+    test_getStringDiffFromLastWord_simpleCase();
+}
 //---------------------------------------- TASK 16
 
 //---------------------------------------- TASK 17
@@ -370,10 +455,12 @@ int main() {
     test_digitToStart_difficultCase();
     test_replaceNumsWithSpaces();
     test_areWordsOrdered();
-    char s7[] = "ABCCCB";
-    reverseOutputWordsFromBag(s7);
+    //char s7[] = "ABCCCB";
+    //reverseOutputWordsFromBag(s7);
     test_getCountPoly();
-    test_task10();
+    test_reverseStringOfWords();
+    test_hasEqualWords();
+    test_getStringDiffFromLastWord();
 }
 
 
