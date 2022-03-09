@@ -5,8 +5,9 @@
 #define ASSERT_STRING(expected, got) assertString(expected, got, \
 __FILE__ , __FUNCTION__ , __LINE__ )
 
-#define MAX_STRING_SIZE 1000
-
+#define MAX_STRING_SIZE 100
+#define MAX_N_WORDS_IN_STRING 100
+#define MAX_WORD_SIZE 20
 
 #ifndef LW_5E_STRING__H
 #define LW_5E_STRING__H
@@ -15,7 +16,6 @@ typedef struct WordDescriptor {
     char *begin; // позиция начала слова
     char *end; // позиция первого символа, после последнего символа слова
 } WordDescriptor;
-
 
 
 //Returning the length of the string.
