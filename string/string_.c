@@ -1,6 +1,5 @@
 #include "string_.h"
 
-
 size_t strLen(char *start) {
     char *end = start;
     while (*end != '\0')
@@ -83,4 +82,14 @@ char *copyIfReverse(char *rstartSource, const char *rendSource, char *startDesti
     }
 
     return startDestination;
+}
+
+void assertString(const char *expected, char *got, char const *fileName, char const *funcName, int line) {
+    if (strcmp(expected, got) != 0) {
+        fprintf(stderr, " File %s\n", fileName);
+        fprintf(stderr, "%s - failed on line %d\n", funcName, line);
+        fprintf(stderr, " Expected : \"%s \"\n", expected);
+        fprintf(stderr, " Got : \"%s \"\n\n", got);
+    } else
+        fprintf(stderr, "%s - OK\n", funcName);
 }

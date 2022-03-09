@@ -81,6 +81,51 @@ build LW_5e.exe: C_EXECUTABLE_LINKER__LW_5e_Debug CMakeFiles/LW_5e.dir/main.c.ob
 
 
 #############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\PeePeePooPoo\CLionProjects\LW_5e\cmake-build-debug && "D:\Program Files\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\PeePeePooPoo\CLionProjects\LW_5e -BC:\Users\PeePeePooPoo\CLionProjects\LW_5e\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Object build statements for EXECUTABLE target tasks
+
+
+#############################################
+# Order-only phony target for tasks
+
+build cmake_object_order_depends_target_tasks: phony || cmake_object_order_depends_target_str
+
+build CMakeFiles/tasks.dir/string/tasks/tasks.c.obj: C_COMPILER__tasks_Debug C$:/Users/PeePeePooPoo/CLionProjects/LW_5e/string/tasks/tasks.c || cmake_object_order_depends_target_tasks
+  DEP_FILE = CMakeFiles\tasks.dir\string\tasks\tasks.c.obj.d
+  FLAGS = -g -std=gnu11
+  OBJECT_DIR = CMakeFiles\tasks.dir
+  OBJECT_FILE_DIR = CMakeFiles\tasks.dir\string\tasks
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target tasks
+
+
+#############################################
+# Link the executable tasks.exe
+
+build tasks.exe: C_EXECUTABLE_LINKER__tasks_Debug CMakeFiles/tasks.dir/string/tasks/tasks.c.obj | libstr.a || libstr.a
+  FLAGS = -g
+  LINK_LIBRARIES = libstr.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\tasks.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = tasks.exe
+  TARGET_IMPLIB = libtasks.dll.a
+  TARGET_PDB = tasks.exe.dbg
+
+
+#############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
@@ -121,24 +166,14 @@ build libstr.a: C_STATIC_LIBRARY_LINKER__str_Debug CMakeFiles/str.dir/string/str
   TARGET_FILE = libstr.a
   TARGET_PDB = str.a.dbg
 
-
-#############################################
-# Utility command for rebuild_cache
-
-build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\PeePeePooPoo\CLionProjects\LW_5e\cmake-build-debug && "D:\Program Files\CLion 2021.2.1\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\PeePeePooPoo\CLionProjects\LW_5e -BC:\Users\PeePeePooPoo\CLionProjects\LW_5e\cmake-build-debug"
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-
-build rebuild_cache: phony CMakeFiles/rebuild_cache.util
-
 # =============================================================================
 # Target aliases.
 
 build LW_5e: phony LW_5e.exe
 
 build str: phony libstr.a
+
+build tasks: phony tasks.exe
 
 # =============================================================================
 # Folder targets.
@@ -148,7 +183,7 @@ build str: phony libstr.a
 #############################################
 # Folder: C:/Users/PeePeePooPoo/CLionProjects/LW_5e/cmake-build-debug
 
-build all: phony LW_5e.exe libstr.a
+build all: phony LW_5e.exe tasks.exe libstr.a
 
 # =============================================================================
 # Built-in targets
