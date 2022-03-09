@@ -111,11 +111,12 @@ void test_digitToStart_difficultCase() {
     ASSERT_STRING("123Simple 23Text", s);
 }
 
-void test_digitToStart(){
+void test_digitToStart() {
     test_digitToStart_simpleCase();
     test_digitToStart_emptyStringCase();
     test_digitToStart_difficultCase();
 }
+
 //---------------------------------------- TASK 4
 void replaceNumsWithSpaces(char *s) {
     char *endBuffer = copy(s, s + strLen(s), _stringBuffer);
@@ -236,14 +237,14 @@ void reverseOutputWordsFromBag(char *s) {
 }
 
 //---------------------------------------- TASK 8
-_Bool isPaliWord(char *begin, char *end) {
+_Bool isPaliWord(char *start, char *end) {
     end--;
 
-    while (end - begin > 0) {
-        if (*begin != *end)
+    while (end - start > 0) {
+        if (*start != *end)
             return 0;
 
-        begin++;
+        start++;
         end--;
     }
 
@@ -455,20 +456,24 @@ void test_getStringDiffFromLastWord() {
 //---------------------------------------- TASK 18
 
 //---------------------------------------- TASK 19
-_Bool areAllLettersInString(char *string, char *word) {
-    static char stringArray[255];
+_Bool areAllLettersInString(char *s, char *letter) {
+    static char additionalArray[255];
 
-    if (*word == '\0' || *string == '\0')
+    if (*letter == '\0' || *s == '\0')
         return 0;
-    while (*string != '\0') {
-        stringArray[*string]++;
-        string++;
+
+    while (*s != '\0') {
+        additionalArray[*s]++;
+        s++;
     }
-    while (*word != '\0') {
-        if (!stringArray[*word])
+
+    while (*letter != '\0') {
+        if (!additionalArray[*letter])
             return 0;
-        word++;
+
+        letter++;
     }
+
     return 1;
 }
 
@@ -513,7 +518,6 @@ int main() {
     test_reverseStringOfWords();
     test_hasEqualWords();
     test_getStringDiffFromLastWord();
-    //test_removePaliWords();
     test_allLettersOfWordAreIncludedInString();
 }
 
